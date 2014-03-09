@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Parallel versions of apply-family functions.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for parallelLapply {parallelMap}"><tr><td>parallelLapply {parallelMap}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Parallel versions of apply-family functions.</h2>
+
+<h3>Description</h3>
+
+<p><code>parallelLapply</code>: A parallel <code><a href="../../base/html/lapply.html">lapply</a></code>
+version.<br> <code>parallelSapply</code>: A parallel
+<code><a href="../../base/html/lapply.html">sapply</a></code> version.<br> All functions are simple
+wrappers for <code><a href="parallelMap.html">parallelMap</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+parallelLapply(xs, fun, ..., level = NA_character_)
+
+parallelSapply(xs, fun, ..., simplify = TRUE, use.names = TRUE,
+  level = NA_character_)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>xs</code></td>
+<td>
+<p>[<code>vector</code> | <code>list</code>]<br> <code>fun</code> is
+applied to the elements of this argument.</p>
+</td></tr>
+<tr valign="top"><td><code>fun</code></td>
+<td>
+<p>[<code>function</code>]<br> Function to map over
+<code>xs</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>[any]<br> Further arguments passed to
+<code>fun</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>simplify</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br> See
+<code><a href="../../base/html/lapply.html">sapply</a></code>.  Default is <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>use.names</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br> See
+<code><a href="../../base/html/lapply.html">sapply</a></code>.  Default is <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>[<code>character(1)</code>]<br> See
+<code><a href="parallelMap.html">parallelMap</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>For <code>parallelLapply</code> an unamed list, for
+<code>parallelSapply</code> it depends on the return value of
+<code>fun</code> and the settings of <code>simplify</code> and
+<code>use.names</code>.
+</p>
+
+<hr><div align="center">[Package <em>parallelMap</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Maps a function over lists or vectors in parallel.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+
+<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script src="http://yandex.st/highlightjs/7.3/languages/r.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head><body>
+
+<table width="100%" summary="page for parallelMap {parallelMap}"><tr><td>parallelMap {parallelMap}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Maps a function over lists or vectors in parallel.</h2>
+
+<h3>Description</h3>
+
+<p>Use the parallelization mode and the other options
+specified in <code><a href="parallelStart.html">parallelStart</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+parallelMap(fun, ..., more.args = list(), simplify = FALSE,
+  use.names = FALSE, level = as.character(NA), show.info = NA)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>fun</code></td>
+<td>
+<p>[<code>function</code>]<br> Function to map over
+<code>...</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>[any]<br> Arguments to vectorize over (list or
+vector).</p>
+</td></tr>
+<tr valign="top"><td><code>more.args</code></td>
+<td>
+<p>[<code>list</code>]<br> A list of other
+arguments passed to <code>fun</code>.  Default is empty list.</p>
+</td></tr>
+<tr valign="top"><td><code>simplify</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br> Should the result
+be simplified?  See <code><a href="../../base/html/lapply.html">sapply</a></code>.  Default is
+<code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>use.names</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br> Should result be
+named by first vector if that is of class character?
+Default is <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>[<code>character(1)</code>]<br> If a (non-missing)
+level is specified in <code><a href="parallelStart.html">parallelStart</a></code>, this
+call is only parallelized if the level specified here
+matches.  Useful if this function is used in a package.
+Default is <code>NA</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>show.info</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br> Verbose output on
+console?  Can be used to override setting from options /
+<code><a href="parallelStart.html">parallelStart</a></code>.  Default is NA which means
+no overriding.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Result.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="r">
+parallelStart()
+parallelMap(identity, 1:2)
+</code></pre>
+
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+</code></pre>
+
+<pre><code class="r">parallelStop()
+
+</code></pre>
+
+
+<hr><div align="center">[Package <em>parallelMap</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

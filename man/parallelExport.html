@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Export R objects for parallelization.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for parallelExport {parallelMap}"><tr><td>parallelExport {parallelMap}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Export R objects for parallelization.</h2>
+
+<h3>Description</h3>
+
+<p>Makes sure that the objects are exported to slave process
+so that they can be used in a job function which is later
+run with <code><a href="parallelMap.html">parallelMap</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+parallelExport(..., objnames, level = as.character(NA), show.info = NA)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>[<code>character</code>]<br> Names of objects to
+export.</p>
+</td></tr>
+<tr valign="top"><td><code>objnames</code></td>
+<td>
+<p>[<code>character(1)</code>]<br> Names of objects
+to export.  Alternative way to pass arguments.</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>[<code>character(1)</code>]<br> If a (non-missing)
+level is specified in <code><a href="parallelStart.html">parallelStart</a></code>, the
+function only exports if the level specified here
+matches.  See <code><a href="parallelMap.html">parallelMap</a></code>.  Useful if this
+function is used in a package.  Default is <code>NA</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>show.info</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br> Verbose output on
+console?  Can be used to override setting from options /
+<code><a href="parallelStart.html">parallelStart</a></code>.  Default is NA which means
+no overriding.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Nothing.
+</p>
+
+<hr><div align="center">[Package <em>parallelMap</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>
