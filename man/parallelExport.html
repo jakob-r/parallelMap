@@ -19,7 +19,8 @@ run with <code><a href="parallelMap.html">parallelMap</a></code>.
 <h3>Usage</h3>
 
 <pre>
-parallelExport(..., objnames, level = as.character(NA), show.info = NA)
+parallelExport(..., objnames, master = FALSE, level = as.character(NA),
+  show.info = NA)
 </pre>
 
 
@@ -43,6 +44,12 @@ level is specified in <code><a href="parallelStart.html">parallelStart</a></code
 function only exports if the level specified here
 matches.  See <code><a href="parallelMap.html">parallelMap</a></code>.  Useful if this
 function is used in a package.  Default is <code>NA</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>master</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br> Really export to
+<code>.GlobalEnv</code> on master for local and multicore mode?
+Default is <code>FALSE</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>show.info</code></td>
 <td>
