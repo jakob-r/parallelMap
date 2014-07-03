@@ -10,16 +10,15 @@
 
 <h3>Description</h3>
 
-<p>Makes sure that the objects are exported to slave process
-so that they can be used in a job function which is later
-run with <code><a href="parallelMap.html">parallelMap</a></code>.
+<p>Makes sure that the objects are exported to slave process so that they can be used in a job
+function which is later run with <code><a href="parallelMap.html">parallelMap</a></code>.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-parallelExport(..., objnames, master = FALSE, level = as.character(NA),
+parallelExport(..., objnames, master = TRUE, level = NA_character_,
   show.info = NA)
 </pre>
 
@@ -29,34 +28,38 @@ parallelExport(..., objnames, master = FALSE, level = as.character(NA),
 <table summary="R argblock">
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>[<code>character</code>]<br> Names of objects to
-export.</p>
+<p>[<code>character</code>]<br>
+Names of objects to export.</p>
 </td></tr>
 <tr valign="top"><td><code>objnames</code></td>
 <td>
-<p>[<code>character(1)</code>]<br> Names of objects
-to export.  Alternative way to pass arguments.</p>
+<p>[<code>character(1)</code>]<br>
+Names of objects to export.
+Alternative way to pass arguments.</p>
 </td></tr>
 <tr valign="top"><td><code>level</code></td>
 <td>
-<p>[<code>character(1)</code>]<br> If a (non-missing)
-level is specified in <code><a href="parallelStart.html">parallelStart</a></code>, the
-function only exports if the level specified here
-matches.  See <code><a href="parallelMap.html">parallelMap</a></code>.  Useful if this
-function is used in a package.  Default is <code>NA</code>.</p>
+<p>[<code>character(1)</code>]<br>
+If a (non-missing) level is specified in <code><a href="parallelStart.html">parallelStart</a></code>,
+the function only exports if the level specified here matches.
+See <code><a href="parallelMap.html">parallelMap</a></code>.
+Useful if this function is used in a package.
+Default is <code>NA</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>master</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> Really export to
-<code>.GlobalEnv</code> on master for local and multicore mode?
-Default is <code>FALSE</code>.</p>
+<p>[<code>logical(1)</code>]<br>
+Really export to package environment on master for local and multicore mode?
+If you do not do this your objects might not get exported for the mapping function call.
+Only disable when you are really sure.
+Default is <code>TRUE</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>show.info</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> Verbose output on
-console?  Can be used to override setting from options /
-<code><a href="parallelStart.html">parallelStart</a></code>.  Default is NA which means
-no overriding.</p>
+<p>[<code>logical(1)</code>]<br>
+Verbose output on console?
+Can be used to override setting from options / <code><a href="parallelStart.html">parallelStart</a></code>.
+Default is NA which means no overriding.</p>
 </td></tr>
 </table>
 

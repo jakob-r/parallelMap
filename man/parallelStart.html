@@ -10,15 +10,13 @@
 
 <h3>Description</h3>
 
-<p>Defines the underlying parallelization mode for
-<code><a href="parallelMap.html">parallelMap</a></code>. Also allows to set a
-&ldquo;level&rdquo; of parallelization. Only calls to
-<code><a href="parallelMap.html">parallelMap</a></code> with a matching level are
-parallelized. The defaults of all settings are taken from
-your options, which you can also define in your R profile.
-For an introductory tutorial and information on the options
-configuration, please go to the project's github page at
-<a href="https://github.com/berndbischl/parallelMap">https://github.com/berndbischl/parallelMap</a>.
+<p>Defines the underlying parallelization mode for <code><a href="parallelMap.html">parallelMap</a></code>.
+Also allows to set a &ldquo;level&rdquo; of parallelization.
+Only calls to <code><a href="parallelMap.html">parallelMap</a></code> with a matching level are parallelized.
+The defaults of all settings are taken from your options, which you can
+also define in your R profile.
+For an introductory tutorial and information on the options configuration, please
+go to the project's github page at <a href="https://github.com/berndbischl/parallelMap">https://github.com/berndbischl/parallelMap</a>.
 </p>
 
 
@@ -26,9 +24,9 @@ configuration, please go to the project's github page at
 
 <pre>
 parallelStart(mode, cpus, socket.hosts, bj.resources = list(), logging,
-  storagedir, level, show.info, ...)
+  storagedir, level, show.info, suppress.local.errors = FALSE, ...)
 
-parallelStartLocal(show.info)
+parallelStartLocal(show.info, suppress.local.errors = FALSE)
 
 parallelStartMulticore(cpus, logging, storagedir, level, show.info)
 
@@ -47,116 +45,110 @@ parallelStartBatchJobs(bj.resources = list(), logging, storagedir, level,
 <table summary="R argblock">
 <tr valign="top"><td><code>mode</code></td>
 <td>
-<p>[<code>character(1)</code>]<br> Which parallel mode
-should be used: &ldquo;local&rdquo;, &ldquo;multicore&rdquo;,
-&ldquo;socket&rdquo;, &ldquo;mpi&rdquo;, &ldquo;BatchJobs&rdquo;.
-Default is the option <code>parallelMap.default.mode</code> or,
-if not set, &ldquo;local&rdquo; without parallel execution.</p>
+<p>[<code>character(1)</code>]<br>
+Which parallel mode should be used:
+&ldquo;local&rdquo;, &ldquo;multicore&rdquo;, &ldquo;socket&rdquo;, &ldquo;mpi&rdquo;, &ldquo;BatchJobs&rdquo;.
+Default is the option <code>parallelMap.default.mode</code> or, if not set,
+&ldquo;local&rdquo; without parallel execution.</p>
 </td></tr>
 <tr valign="top"><td><code>cpus</code></td>
 <td>
-<p>[<code>integer(1)</code>]<br> Number of used cpus.
+<p>[<code>integer(1)</code>]<br>
+Number of used cpus.
 For local and BatchJobs mode this argument is ignored.
-For socket mode, this is the number of processes spawned
-on localhost, if you want processes on multiple machines
-use <code>socket.hosts</code>.  Default is the option
-<code>parallelMap.default.cpus</code> or, if not set,
+For socket mode, this is the number of processes spawned on localhost, if
+you want processes on multiple machines use <code>socket.hosts</code>.
+Default is the option <code>parallelMap.default.cpus</code> or, if not set,
 <code><a href="../../parallel/html/detectCores.html">detectCores</a></code> for multicore mode,
-<code><a href="../../Rmpi/html/mpi.universe.size.html">mpi.universe.size</a></code> for mpi mode and 1
-for socket mode.</p>
+<code><a href="../../Rmpi/html/mpi.universe.size.html">mpi.universe.size</a></code> for mpi mode
+and 1 for socket mode.</p>
 </td></tr>
 <tr valign="top"><td><code>socket.hosts</code></td>
 <td>
-<p>[<code>character</code>]<br> Only used in
-socket mode, otherwise ignored.  Names of hosts where
-parallel processes are spawned.  Default is the option
-<code>parallelMap.default.socket.hosts</code>, if this option
-exists.</p>
+<p>[<code>character</code>]<br>
+Only used in socket mode, otherwise ignored.
+Names of hosts where parallel processes are spawned.
+Default is the option <code>parallelMap.default.socket.hosts</code>, if this option exists.</p>
 </td></tr>
 <tr valign="top"><td><code>bj.resources</code></td>
 <td>
-<p>[<code>list</code>]<br> Resources like
-walltime for submitting jobs on HPC clusters via
-BatchJobs.  See <code><a href="../../BatchJobs/html/submitJobs.html">submitJobs</a></code>.
+<p>[<code>list</code>]<br>
+Resources like walltime for submitting jobs on HPC clusters via BatchJobs.
+See <code><a href="../../BatchJobs/html/submitJobs.html">submitJobs</a></code>.
 Defaults are taken from your BatchJobs config file.</p>
 </td></tr>
 <tr valign="top"><td><code>logging</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> Should slave output
-be logged to files via <code><a href="../../base/html/sink.html">sink</a></code> under the
-<code>storagedir</code>?  Files are named
-&quot;&lt;iteration_number&gt;.log&quot; and put into unique
-subdirectories named &ldquo;parallelMap_log_&lt;nr&gt;&rdquo; for
-each subsequent <code><a href="parallelMap.html">parallelMap</a></code> operation.
-Previous logging directories are removed on
-<code>parallelStart</code> if <code>logging</code> is enabled.
-Logging is not supported for local mode, because you will
-see all output on the master and can also run stuff like
-<code><a href="../../base/html/traceback.html">traceback</a></code> in case of errors.  Default is
-the option <code>parallelMap.default.logging</code> or, if not
-set, <code>FALSE</code>.</p>
+<p>[<code>logical(1)</code>]<br>
+Should slave output be logged to files via <code><a href="../../base/html/sink.html">sink</a></code> under the <code>storagedir</code>?
+Files are named &quot;&lt;iteration_number&gt;.log&quot; and put into unique
+subdirectories named &ldquo;parallelMap_log_&lt;nr&gt;&rdquo; for each subsequent
+<code><a href="parallelMap.html">parallelMap</a></code> operation.
+Previous logging directories are removed on <code>parallelStart</code>
+if <code>logging</code> is enabled.
+Logging is not supported for local mode, because you will see all
+output on the master and can also run stuff like
+<code><a href="../../base/html/traceback.html">traceback</a></code> in case of errors.
+Default is the option <code>parallelMap.default.logging</code> or, if not set,
+<code>FALSE</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>storagedir</code></td>
 <td>
-<p>[<code>character(1)</code>]<br> Existing
-directory where log files and intermediate objects for
-BatchsJobs mode are stored.  Note that all nodes must
-have write access to exactly this path.  Default is the
-current working directory.</p>
+<p>[<code>character(1)</code>]<br>
+Existing directory where log files and intermediate objects for BatchsJobs
+mode are stored.
+Note that all nodes must have write access to exactly this path.
+Default is the current working directory.</p>
 </td></tr>
 <tr valign="top"><td><code>level</code></td>
 <td>
-<p>[<code>character(1)</code>]<br> You can set this so
-only calls to <code><a href="parallelMap.html">parallelMap</a></code> are parallelized
-that have the same level specified.  Default is the
-option <code>parallelMap.default.level</code> or, if not set,
-<code>NA</code> which means all calls to
-<code><a href="parallelMap.html">parallelMap</a></code> are are parallelized.</p>
+<p>[<code>character(1)</code>]<br>
+You can set this so only calls to <code><a href="parallelMap.html">parallelMap</a></code> are parallelized
+that have the same level specified.
+Default is the option <code>parallelMap.default.level</code> or, if not set,
+<code>NA</code> which means all calls to <code><a href="parallelMap.html">parallelMap</a></code> are are parallelized.</p>
 </td></tr>
 <tr valign="top"><td><code>show.info</code></td>
 <td>
-<p>[<code>logical(1)</code>]<br> Verbose output on
-console for all further package calls?  Default is the
-option <code>parallelMap.default.show.info</code> or, if not
-set, <code>TRUE</code>.</p>
+<p>[<code>logical(1)</code>]<br>
+Verbose output on console for all further package calls?
+Default is the option <code>parallelMap.default.show.info</code> or, if not set,
+<code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>suppress.local.errors</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br>
+Should reporting of error messages during function evaluations in local mode be suppressed?
+Default ist FALSE, i.e. every error message is shown.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>[any]<br> Optional parameters, for socket mode
-passed to <code><a href="../../parallel/html/makePSOCKcluster.html">makePSOCKcluster</a></code>, for
-mpi mode passed to <code><a href="../../parallel/html/makeCluster.html">makeCluster</a></code>.</p>
+<p>[any]<br>
+Optional parameters, for socket mode passed to <code><a href="../../parallel/html/makePSOCKcluster.html">makePSOCKcluster</a></code>,
+for mpi mode passed to <code><a href="../../parallel/html/makeCluster.html">makeCluster</a></code>.</p>
 </td></tr>
 </table>
 
 
 <h3>Details</h3>
 
-<p>Currently the following modes are supported, which
-internally dispatch the mapping operation to functions from
-different parallelization packages:
+<p>Currently the following modes are supported, which internally dispatch the mapping operation
+to functions from different parallelization packages:
 </p>
- <dl>
-<dt>local</dt><dd><p>No parallelization with
-<code><a href="../../base/html/mapply.html">mapply</a></code>.</p>
-</dd> <dt>multicore</dt><dd><p>Multicore execution
-on a single machine with<code><a href="../../parallel/html/mcmapply.html">mcmapply</a></code>.</p>
-</dd>
-<dt>socket</dt><dd><p>Socket cluster on one or multiple machines
-with <code><a href="../../parallel/html/makePSOCKcluster.html">makePSOCKcluster</a></code> and
-<code><a href="../../parallel/html/clusterMap.html">clusterMap</a></code>.</p>
-</dd> <dt>mpi</dt><dd><p>Snow MPI
-cluster on one or multiple machines with
-<code><a href="../../parallel/html/makeCluster.html">makeCluster</a></code> and
-<code><a href="../../parallel/html/clusterMap.html">clusterMap</a></code>.</p>
-</dd>
-<dt>BatchJobs</dt><dd><p>Parallelization on batch queuing HPC
-clusters, e.g., Torque, SLURM, etc., with
-<code><a href="../../BatchJobs/html/batchMap.html">batchMap</a></code>.</p>
-</dd> </dl>
 
-<p>For BatchJobs mode you need to define a storage directory
-through the argument <code>storagedir</code> or the option
-<code>parallelMap.default.storagedir</code>.
+<dl>
+<dt>local</dt><dd><p>No parallelization with <code><a href="../../base/html/mapply.html">mapply</a></code>.</p>
+</dd>
+<dt>multicore</dt><dd><p>Multicore execution on a single machine with <code><a href="../../parallel/html/mclapply.html">mclapply</a></code>.</p>
+</dd>
+<dt>mpi</dt><dd><p>Snow MPI cluster on one or multiple machines with <code><a href="../../parallel/html/makeCluster.html">makeCluster</a></code> and <code><a href="../../parallel/html/clusterMap.html">clusterMap</a></code>.</p>
+</dd>
+<dt>BatchJobs</dt><dd><p>Parallelization on batch queuing HPC clusters, e.g., Torque, SLURM, etc., with <code><a href="../../BatchJobs/html/batchMap.html">batchMap</a></code>.</p>
+</dd>
+</dl>
+
+<p>For BatchJobs mode you need to define a storage directory through the argument <code>storagedir</code> or
+the option <code>parallelMap.default.storagedir</code>.
 </p>
 
 
