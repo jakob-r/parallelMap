@@ -1,21 +1,14 @@
-sudo: required
-dist: trusty
 language: r
-
-r:
-  - oldrel
-  - release
-  - devel
+sudo: false
+cache: packages
 
 addons:
   apt:
-    packages:
-      - r-cran-rmpi
-      - libssh2-1-dev
+    sources:
+    - libopenmpi-dev
+    - openmpi 
 
-r_binary_packages:
-  - covr
-  - batchjobs
+r:
+   - release
+   - devel
 
-after_success:
-  - Rscript -e 'library(covr);coveralls()'
